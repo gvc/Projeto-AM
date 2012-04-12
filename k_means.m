@@ -19,5 +19,5 @@ for i=i:100
     end
 end
 
-erros_classe_1 = sum(ismember((gabarito - melhor_resposta), -1))
-erros_classe_2 = sum(ismember((gabarito - melhor_resposta), 1))
+erros_classe_1 = sum(ismember((gabarito - melhor_resposta), -1));
+erros_classe_2 = sum(ismember((gabarito - melhor_resposta), 1));
