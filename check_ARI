@@ -1,0 +1,11 @@
+if(exist('output') == 0)
+   k_means 
+end
+
+for i = 1:100
+
+    total_erro(i) = output{i}.erro_1 + output{i}.erro_2;
+    ari(i) = ARI(gabarito,output{i}.clusters);
+    
+end
+
