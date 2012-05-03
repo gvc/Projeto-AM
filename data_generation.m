@@ -20,7 +20,7 @@ classe_1 = [classe_1, repmat(1, 150, 1)];
 classe_2 = [classe_2, repmat(2, 150, 1)];
 
 data = [classe_1; classe_2];
-data = data(randperm(size(data,1)),:);
+% data = data(randperm(size(data,1)),:);
 
 % clear('mu_1', 'Sigma_1', 'mu_2_1', 'Sigma_2_1', 'mu_2_2', 'Sigma_2_2', ...
 %     'classe_2_1', 'classe_2_2', 'classe_1', 'classe_2');
