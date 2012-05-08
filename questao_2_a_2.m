@@ -1,7 +1,7 @@
 function posteriori = questao_2_a_2(elemento,dados)
-%alimentar variavel dados sem informação de classe
+%alimentar variavel dados sem informa????o de classe
 
-rotulos = kmeans(dados,2);
+rotulos = kmeans(dados,2, 'emptyaction', 'singleton');
 
 componente_a = dados(rotulos == 1,:);
 componente_b = dados(rotulos == 2,:);
@@ -32,9 +32,9 @@ while(non_stop)
           non_stop = false;
           
           if(count < 100)
-              fprintf('algoritmo EM convergiu após %d iterações\n',count)
+%               fprintf('algoritmo EM convergiu ap??s %d itera????es\n',count)
           else
-              fprintf('algoritmo EM finalizado após %d iterações sem convergência',count);
+%               fprintf('algoritmo EM finalizado ap??s %d itera????es sem converg??ncia',count);
           end
       end
       
