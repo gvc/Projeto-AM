@@ -7,7 +7,7 @@ max_x = max(training(: , 1));
 min_y = min(training(: , 1));
 max_y = max(training(: , 1));
 
-steps = 150;
+steps = 80;
 
 sorted_training = sortrows(training, 3);
 s_class_1 = sorted_training(1:135, 1:2);
@@ -26,8 +26,27 @@ for i = 1:steps
     for j = 1:steps
         e = [min_x + x_step * i, min_y + y_step * j];
 
-        classe = knn_classifier(e, 11, training, 1, 2);
+        pp_c1_bayes = questao_2_a_1(e, s_class_1);
+        pp_c2_bayes = questao_2_a_2(e, s_class_2);
 
+        pp_c1_parzen = parzen_window(e, s_class_1, 0.5/16);
+        pp_c2_parzen = parzen_window(e, s_class_2, 0.5/16);
+
+        knn_answer = knn(e, 11, training, 1, 2);
+        pp_c1_knn = knn_answer(1);
+        pp_c2_knn = knn_answer(2);
+
+        pp_c1 = sum([pp_c1_parzen pp_c1_knn pp_c1_bayes]);
+        pp_c2 = sum([pp_c2_parzen pp_c2_knn pp_c2_bayes]);
+
+
+        if pp_c1 >= pp_c2
+            classe = 1;
+        else
+            classe = 2;
+        end
+        
+        
         if classe == 1
             class_1(class_1_index, :) = e;
             class_1_index = class_1_index + 1;

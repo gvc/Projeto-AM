@@ -7,7 +7,7 @@ max_x = max(training(: , 1));
 min_y = min(training(: , 1));
 max_y = max(training(: , 1));
 
-steps = 150;
+steps = 100;
 
 sorted_training = sortrows(training, 3);
 s_class_1 = sorted_training(1:135, 1:2);
@@ -26,8 +26,16 @@ for i = 1:steps
     for j = 1:steps
         e = [min_x + x_step * i, min_y + y_step * j];
 
-        classe = knn_classifier(e, 11, training, 1, 2);
-
+        prob_1 = questao_2_a_1(e, s_class_1);
+        prob_2 = questao_2_a_2(e, s_class_2);
+    
+        if prob_1 >= prob_2
+          classe = 1;
+        else
+          classe = 2;
+        end
+        
+        
         if classe == 1
             class_1(class_1_index, :) = e;
             class_1_index = class_1_index + 1;

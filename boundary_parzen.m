@@ -1,4 +1,4 @@
-load('fold_10')
+load('fold_5')
 training = new_fold.training;
 
 min_x = min(training(: , 1));
@@ -13,8 +13,10 @@ sorted_training = sortrows(training, 3);
 s_class_1 = sorted_training(1:135, 1:2);
 s_class_2 = sorted_training(136:270, 1:2);
 
-class_1 = [];
-class_2 = [];
+class_1 = repmat(0, steps^2, 2);
+class_1_index = 1;
+class_2 = repmat(0, steps^2, 2);
+class_2_index = 1;
 
 x_step = (max_x - min_x)/steps;
 y_step = (max_y - min_y)/steps;
@@ -27,9 +29,11 @@ for i = 1:steps
         classe = parzen_window_classifier(e, 0.5/16, s_class_1, s_class_2, 1, 2);
 
         if classe == 1
-            class_1 = [class_1; e];
+            class_1(class_1_index, :) = e;
+            class_1_index = class_1_index + 1;
         else
-            class_2 = [class_2; e];
+            class_2(class_2_index, :) = e;
+            class_2_index = class_2_index + 1;
         end
     end
 end
@@ -37,9 +41,9 @@ end
 hold on
 axis([min_x max_x min_y max_y])
 scatter(class_1(:, 1), class_1(:, 2), 'MarkerFaceColor', 'y', 'MarkerEdgeColor', 'none');
-scatter(class_2(:, 1), class_2(:, 2), 'MarkerFaceColor', 'c', 'MarkerEdgeColor', 'none');
-scatter(s_class_1(:, 1), s_class_1(:, 2), 'MarkerFaceColor', 'k', 'MarkerEdgeColor', 'k', 'Marker', '+');
-scatter(s_class_2(:, 1), s_class_2(:, 2), 'MarkerFaceColor', 'w', 'MarkerEdgeColor', 'r', 'Marker', 'x');
+scatter(class_2(:, 1), class_2(:, 2), 'MarkerFaceColor', [.87 .87 .87], 'MarkerEdgeColor', 'none');
+scatter(s_class_1(:, 1), s_class_1(:, 2), 'MarkerFaceColor', 'none', 'MarkerEdgeColor', 'b', 'Marker', 'o');
+scatter(s_class_2(:, 1), s_class_2(:, 2), 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'r', 'Marker', 'x');
 hold off
 
 
